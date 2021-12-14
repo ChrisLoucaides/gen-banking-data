@@ -30,9 +30,9 @@ def main():
         weights = [banks[bank][0] for bank in banks]
         bank = random.choices(bank_list, weights=weights)
         nationality = random.choice(nationalities)
-        df.loc[i] = [bank[0], 'Yes', nationality, 'First Year', numberOfStoreDiscounts(bank[0]), cashback(bank[0]), overdraft(bank[0]), exchangeLimit(bank[0]), customerService(bank[0]), exchangeRateToCustomerService(bank[0]), exchangeRateToBenefits(bank[0]), exchangeRateToOnlineBanking(bank[0]), customerCareToOnlineBanking(bank[0]), customerCareToExtraBenefits(bank[0]), onlineBankingToExtraBenefits(bank[0])]
+        df.loc[i] = [bank[0], 'Yes', nationality, 'First Year', numberOfStoreDiscounts(bank[0]), cashback(bank[0]), overdraft(bank[0]), exchangeLimit(bank[0]), customerService(bank[0]), exchangeRateToCustomerService(bank[0], nationality), exchangeRateToBenefits(bank[0], nationality), exchangeRateToOnlineBanking(bank[0], nationality), customerCareToOnlineBanking(bank[0]), customerCareToExtraBenefits(bank[0]), onlineBankingToExtraBenefits(bank[0])]
 
-    df.to_csv('firstYearNoJob.csv')
+    df.to_csv('firstYearWithJob.csv')
 
 def customerService(bank): #generate quality of customer service
     if random.randint(0, 1) == 0:
@@ -82,6 +82,8 @@ def numberOfStoreDiscounts(bank):
             return random.randint(1,3)
         else:
             return random.randint(0,1)
+    else:
+        return random.randint(0,1)
 
 def exchangeLimit(bank):
     if bank == "Monzo":
@@ -123,9 +125,9 @@ def cashback(bank):
     elif bank == "Santander":
         return 0
 
-def exchangeRateToCustomerService(bank):
+def exchangeRateToCustomerService(bank, nationality):
 
-    if bank == "Revolut":
+    if bank == "Revolut" or nationality == "EU/International":
         if(random.randint(0,7) < 1):
             return "It's the same"
         elif random.randint(0,1) == 0:
@@ -145,8 +147,8 @@ def exchangeRateToCustomerService(bank):
         else:
             return "Absolutely not important"
 
-def exchangeRateToBenefits(bank):
-        if bank == "Revolut":
+def exchangeRateToBenefits(bank, nationality):
+        if bank == "Revolut" or nationality == "EU/International":
             if(random.randint(0,7) < 1):
                 return "It's the same"
             elif random.randint(0,1) == 0:
@@ -166,8 +168,8 @@ def exchangeRateToBenefits(bank):
             else:
                 return "Absolutely not important"
 
-def exchangeRateToOnlineBanking(bank):
-        if bank == "Revolut" or bank == "Monzo":
+def exchangeRateToOnlineBanking(bank, nationality):
+        if bank == "Revolut" or bank == "Monzo" or nationality == "EU/International":
             if(random.randint(0,7) < 1):
                 return "It's the same"
             elif random.randint(0,1) == 0:
