@@ -7,15 +7,15 @@ def main():
     columns = ['What is your primary UK bank?', 'Do you have a job?', 'Are you a UK, EU/International student?', 'Are you a first, second, or third year student?', 'Number of store discounts', 'Cashback', 'Overdraft', 'What is your exchange limit?', "Good customer service?", 'Importance Exchange rate : Customer Service', 'Importance Exchange rate : Extra Benefits', 'Importance Exchange rate : Online banking', 'Customer Service : Online Banking', 'Importance Customer Service : Extra Benefits', 'Importance Extra Benefits : Online Banking']
     banks = {
         #Bank : weight
-        'Monzo': [0.35],
-        'Revolut': [0.25],
-        'Starling': [0.15],
-        'Lloyds': [0.08],
-        'Barclays': [0.05],
-        'Natwest': [0.04],
-        'Nationwide': [0.03],
-        'HSBC': [0.03],
-        'Santander': [0.02]
+        'Monzo': [0.15],
+        'Revolut': [0.14],
+        'Starling': [0.05],
+        'Lloyds': [0.18],
+        'Barclays': [0.17],
+        'Natwest': [0.12],
+        'Nationwide': [0.14],
+        'HSBC': [0.04],
+        'Santander': [0.1]
     }
 
 
@@ -30,7 +30,7 @@ def main():
         weights = [banks[bank][0] for bank in banks]
         bank = random.choices(bank_list, weights=weights)
         nationality = random.choice(nationalities)
-        df.loc[i] = [bank[0], 'No', nationality, 'First Year', numberOfStoreDiscounts(bank[0]), cashback(bank[0]), overdraft(bank[0]), exchangeLimit(bank[0]), customerService(bank[0]), exchangeRateToCustomerService(bank[0]), exchangeRateToBenefits(bank[0]), exchangeRateToOnlineBanking(bank[0]), customerCareToOnlineBanking(bank[0]), customerCareToExtraBenefits(bank[0]), onlineBankingToExtraBenefits(bank[0])]
+        df.loc[i] = [bank[0], 'No', nationality, 'Third Year', numberOfStoreDiscounts(bank[0]), cashback(bank[0]), overdraft(bank[0]), exchangeLimit(bank[0]), customerService(bank[0]), exchangeRateToCustomerService(bank[0]), exchangeRateToBenefits(bank[0]), exchangeRateToOnlineBanking(bank[0]), customerCareToOnlineBanking(bank[0]), customerCareToExtraBenefits(bank[0]), onlineBankingToExtraBenefits(bank[0])]
 
     df.to_csv('firstYearNoJob.csv')
 
